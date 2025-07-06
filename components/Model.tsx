@@ -15,7 +15,7 @@ interface GLTFResult extends GLTF {
 
 export default function Model(props: GroupProps) {
   const { nodes } = useGLTF('/flower-transformed.glb') as unknown as GLTFResult
-  
+
   const petalControls = useControls('Petal Material', {
     backside: true,
     backsideThickness: { value: 1, min: 0, max: 2 },
@@ -27,20 +27,20 @@ export default function Model(props: GroupProps) {
     clearcoat: { value: 1, min: 0, max: 1 },
     envMapIntensity: { value: 0.5, min: 0, max: 2 }
   })
-  
+
   const sphereControls = useControls('Inner Sphere Material', {
     samples: { value: 6, min: 1, max: 32, step: 1 },
     resolution: { value: 512, min: 128, max: 1024, step: 128 },
     thickness: { value: -1, min: -2, max: 2 },
     anisotropy: { value: 0.25, min: 0, max: 1 }
   })
-  
+
   const glowControls = useControls('Glow Sphere Material', {
     emissiveIntensity: { value: 2, min: 0, max: 5 },
     color: '#ff0000',
     emissive: '#ff69b4'
   })
-  
+
   const reflectorControls = useControls('Reflective Surface', {
     blur: { value: [300, 100], min: 0, max: 1000, step: 50 },
     resolution: { value: 2048, min: 128, max: 2048, step: 128 },
@@ -54,7 +54,7 @@ export default function Model(props: GroupProps) {
     metalness: { value: 0.5, min: 0, max: 1 },
     mirror: { value: 1, min: 0, max: 1 }
   })
-  
+
   return (
     <group {...props} dispose={null} position={[0, .5, 0]}>
       <fog attach="fog" args={['#a79', 8.5, 12]} />
@@ -96,3 +96,50 @@ export default function Model(props: GroupProps) {
 }
 
 useGLTF.preload('/flower-transformed.glb')
+
+
+
+
+// import { useGLTF } from "@react-three/drei"
+// import { MeshTransmissionMaterial } from "@react-three/drei"
+// import { GroupProps } from "@react-three/fiber"
+// import { Mesh, BufferGeometry } from "three"
+// import { GLTF } from "three-stdlib"
+
+// interface GLTFResult extends GLTF {
+//   nodes: {
+//     petals: Mesh
+//     Sphere: Mesh
+//     Sphere001: Mesh
+//   }
+// }
+
+// export default function Model(props: GroupProps) {
+//   const { nodes } = useGLTF('/flower-transformed.glb') as unknown as GLTFResult
+//   return (
+//     <group {...props} dispose={null}>
+//       <mesh geometry={nodes.petals.geometry}>
+//         <MeshTransmissionMaterial
+//           backside
+//           backsideThickness={1}
+//           samples={16}
+//           thickness={0.2}
+//           anisotropicBlur={0.1}
+//           iridescence={1}
+//           iridescenceIOR={1}
+//           iridescenceThicknessRange={[0, 1400]}
+//           clearcoat={1}
+//           envMapIntensity={0.5}
+//         />
+//         <mesh geometry={nodes.Sphere.geometry}>
+//           <MeshTransmissionMaterial samples={6} resolution={512} thickness={-1} anisotropy={0.25} />
+//         </mesh>
+//       </mesh>
+//       <mesh geometry={nodes.Sphere001.geometry}>
+//         <meshStandardMaterial toneMapped={false} emissive="hotpink" color="red" emissiveIntensity={2} />
+//       </mesh>
+//     </group>
+//   )
+// }
+
+// useGLTF.preload('/flower-transformed.glb')
