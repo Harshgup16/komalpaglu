@@ -5,7 +5,7 @@ import { Canvas, useThree } from "@react-three/fiber"
 import { Suspense, useRef, useEffect } from "react"
 import { useProgress, Html, OrbitControls, Environment, Lightformer, Image, Text, MeshTransmissionMaterial } from "@react-three/drei"
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import Model from "./Model"
+import Model from "../components/Model"
 import { GroupProps } from "@react-three/fiber"
 import { Group } from "three"
 import { useControls } from "leva"
